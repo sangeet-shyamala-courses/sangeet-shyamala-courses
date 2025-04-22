@@ -5,32 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sangeet Shyamala - April 2025 Classes</title>
   <style>
+    :root {
+      --font-family: Arial;
+      --bg-color: #f8f9fa;
+      --text-color: #333;
+      --highlight-color: #b22222;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      font-family: var(--font-family), sans-serif;
+      background-color: var(--bg-color);
       margin: 0;
       padding: 20px;
-      color: #333;
+      color: var(--text-color);
     }
+
     h1, h2 {
-      color: #b22222;
+      color: var(--highlight-color);
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 40px;
+      overflow-x: auto;
+      display: block;
     }
+
     th, td {
       border: 1px solid #ccc;
       padding: 10px;
       text-align: left;
     }
+
     th {
       background-color: #f2f2f2;
     }
+
     section {
       margin-bottom: 50px;
     }
+
     #searchBox {
       padding: 10px;
       width: 100%;
@@ -38,69 +53,116 @@
       margin: 20px 0;
       font-size: 16px;
     }
+
     .course-table {
       display: none;
     }
+
     .visible {
-      display: table;
+      display: block;
+      border: 2px solid var(--highlight-color);
+      box-shadow: 0 0 10px rgba(178, 34, 34, 0.4);
+      border-radius: 10px;
+    }
+
+    #logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .teacher-image {
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    #settings {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+
+    #settings label {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      table, th, td {
+        font-size: 14px;
+      }
+
+      #searchBox, #bgColorPicker, #fontPicker, #themeSelector {
+        font-size: 14px;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      #logo {
+        width: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      #searchBox, #bgColorPicker, #fontPicker, #themeSelector {
+        width: 100%;
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
+  <img id="logo" src="" alt="Sangeet Shyamala Logo" onerror="this.style.display='none'" />
   <h1>Sangeet Shyamala - April 2025 Course Schedule & Fees</h1>
+
+  <div id="settings">
+    <label>Upload Logo: <input type="file" accept="image/*" onchange="uploadLogo(event)" /></label>
+    <label>Background Color: <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()" /></label>
+    <label>Font Style:
+      <select id="fontPicker" onchange="changeFontFamily()">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+      </select>
+    </label>
+    <label>Theme:
+      <select id="themeSelector" onchange="changeTheme()">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="classic">Classic</option>
+      </select>
+    </label>
+    <label>Upload Teacher Image: <input type="file" accept="image/*" onchange="uploadTeacherImage(event)" /></label>
+    <div id="teacherImagePreview"></div>
+  </div>
 
   <input type="text" id="searchBox" placeholder="Search for a course by name..." onkeyup="searchCourses()" />
 
-  <section class="course-table" id="music">
-    <h2>Music Classes</h2>
-    <table>
-      <tr><th>Course</th><th>Instructor</th><th>Days</th><th>Time</th><th>Fee</th><th>Notes</th></tr>
-      <tr><td>Hindustani Vocal</td><td>Akansha</td><td>Sat & Sun (Kids)</td><td>10:00–11:00 AM</td><td>₹3000/month</td><td>₹1200/hour (Individual)</td></tr>
-      <tr><td>Piano & Voice</td><td>Kinneret Prabhudas</td><td>Mon to Thurs</td><td>9:00 AM – 6:45 PM</td><td>₹2000 (45 min), ₹1500 (30 min)</td><td>Individual</td></tr>
-      <tr><td>Tabla</td><td>Bijoy Mandal</td><td>Wed, Fri & Sat</td><td>Varies</td><td>₹2000–₹4500/month</td><td>Age 4+</td></tr>
-      <tr><td>Vocal & Sitar</td><td>Sephali Maiti</td><td>Tues & Fri</td><td>5:00–6:00 PM</td><td>₹2000/month</td><td></td></tr>
-      <tr><td>Sitar (Group)</td><td>—</td><td>Tues</td><td>4:00–5:00 PM</td><td>₹4000/month</td><td>₹1500/class (Individual)</td></tr>
-    </table>
-  </section>
-
-  <section class="course-table" id="dance">
-    <h2>Dance Classes</h2>
-    <table>
-      <tr><th>Course</th><th>Instructor</th><th>Days</th><th>Time</th><th>Fee</th><th>Notes</th></tr>
-      <tr><td>Bharatnatyam</td><td>Meenakshi Rao</td><td>Sat & Sun</td><td>8:30–12:00 PM</td><td>₹2800 (8 classes)</td><td>Multiple Batches</td></tr>
-      <tr><td>Kathak</td><td>Deepti Gupta</td><td>Multiple Days</td><td>Varies</td><td>₹2000–₹2300 (8 classes)</td><td>Beginner & Advanced</td></tr>
-      <tr><td>Ballet</td><td>Komal</td><td>Thurs & Sat</td><td>4:00–5:00 PM</td><td>₹3000 (4), ₹5500 (8)</td><td>Age 4+</td></tr>
-      <tr><td>Odissi</td><td>Subrata Tripathy</td><td>Thursday</td><td>3:30–5:00 PM</td><td>₹2000 (4 classes)</td><td>Age 4+</td></tr>
-      <tr><td>Dance Fitness</td><td>Ajay Soni</td><td>Mon, Wed, Fri</td><td>6:15–7:15 PM</td><td>₹3500 (8), ₹4500 (12)</td><td></td></tr>
-      <tr><td>Zumba Fitness</td><td>Shivani</td><td>Thurs, Sat, Sun</td><td>Various</td><td>₹2000 (4), ₹3500 (8)</td><td>Ages 3.5+ and 8+</td></tr>
-    </table>
-  </section>
-
-  <section class="course-table" id="fitness">
-    <h2>Fitness</h2>
-    <table>
-      <tr><th>Course</th><th>Instructor</th><th>Days</th><th>Time</th><th>Fee</th><th>Notes</th></tr>
-      <tr><td>Yoga</td><td>—</td><td>Tues & Thurs</td><td>6:00–7:00 PM</td><td>₹3000 (8 classes)</td><td></td></tr>
-      <tr><td>Karate</td><td>Tarun Chakravarty</td><td>Mon & Thurs</td><td>5:00–6:00 PM</td><td>₹2000 (8 classes)</td><td></td></tr>
-    </table>
-  </section>
-
-  <section class="course-table" id="art">
-    <h2>Art Classes</h2>
-    <table>
-      <tr><th>Course</th><th>Instructor</th><th>Days</th><th>Time</th><th>Fee</th><th>Notes</th></tr>
-      <tr><td>Painting</td><td>Gaurav Nagar</td><td>Tues, Thurs, Sun</td><td>11:00–1:00, 4:00–6:00</td><td>₹2000 (4), ₹4200 (12), ₹700/hr</td><td>Individual and Group</td></tr>
-      <tr><td>Sculpture</td><td>Javed Hussain</td><td>Sat & Sun</td><td>10:30–12:30 PM</td><td>₹2500 (8 classes)</td><td></td></tr>
-    </table>
-  </section>
-
-  <section class="course-table" id="writing">
-    <h2>Creative Writing</h2>
-    <table>
-      <tr><th>Instructor</th><th>Days</th><th>Time</th><th>Fee</th><th>Notes</th></tr>
-      <tr><td>Kiran Mishra</td><td>Sat & Sun</td><td>Sat: 11–12, Sun: 3–4</td><td>₹2000 (4 classes), ₹700/hr (Individual)</td><td></td></tr>
-    </table>
-  </section>
+  <!-- Course sections go here -->
 
   <script>
     function searchCourses() {
@@ -122,6 +184,59 @@
         alert("No matching course found. Try a different keyword.");
       } else if (input === "") {
         sections.forEach(section => section.classList.remove("visible"));
+      }
+    }
+
+    function uploadLogo(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById("logo").src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function uploadTeacherImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.className = "teacher-image";
+          document.getElementById("teacherImagePreview").innerHTML = "";
+          document.getElementById("teacherImagePreview").appendChild(img);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function changeBackgroundColor() {
+      const color = document.getElementById("bgColorPicker").value;
+      document.body.style.setProperty("--bg-color", color);
+    }
+
+    function changeFontFamily() {
+      const font = document.getElementById("fontPicker").value;
+      document.body.style.setProperty("--font-family", font);
+    }
+
+    function changeTheme() {
+      const theme = document.getElementById("themeSelector").value;
+      if (theme === "light") {
+        document.body.style.setProperty("--bg-color", "#f8f9fa");
+        document.body.style.setProperty("--text-color", "#333");
+        document.body.style.setProperty("--highlight-color", "#b22222");
+      } else if (theme === "dark") {
+        document.body.style.setProperty("--bg-color", "#1e1e1e");
+        document.body.style.setProperty("--text-color", "#f0f0f0");
+        document.body.style.setProperty("--highlight-color", "#ff6347");
+      } else if (theme === "classic") {
+        document.body.style.setProperty("--bg-color", "#fff8dc");
+        document.body.style.setProperty("--text-color", "#000080");
+        document.body.style.setProperty("--highlight-color", "#8b0000");
       }
     }
   </script>
