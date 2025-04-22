@@ -1,291 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sangeet Shyamala - April 2025 Classes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable Course Schedule</title>
   <style>
-    :root {
-      --font-family: Arial;
-      --bg-color: #f8f9fa;
-      --text-color: #333;
-      --highlight-color: #b22222;
-    }
-
     body {
-      font-family: var(--font-family), sans-serif;
-      background-color: var(--bg-color);
-      margin: 0;
+      font-family: Verdana, sans-serif;
       padding: 20px;
-      color: var(--text-color);
+      background-color: #f8f9fa;
     }
-
-    h1, h2 {
-      color: var(--highlight-color);
+    h1 {
+      color: #b22222;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 40px;
-      overflow-x: auto;
-      display: block;
+      margin-top: 20px;
     }
-
     th, td {
       border: 1px solid #ccc;
       padding: 10px;
       text-align: left;
     }
-
     th {
       background-color: #f2f2f2;
     }
-
-    section {
-      margin-bottom: 50px;
-    }
-
-    #searchBox {
-      padding: 10px;
+    input[type="text"] {
       width: 100%;
-      max-width: 400px;
-      margin: 20px 0;
-      font-size: 16px;
+      box-sizing: border-box;
+      padding: 5px;
     }
-
-    .course-table {
-      display: none;
+    .edit-btn {
+      padding: 5px 10px;
+      margin-top: 5px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
     }
-
-    .visible {
-      display: block;
-      border: 2px solid var(--highlight-color);
-      box-shadow: 0 0 10px rgba(178, 34, 34, 0.4);
-      border-radius: 10px;
-    }
-
-    #logo {
-      width: 150px;
-      height: auto;
-      margin-bottom: 20px;
-    }
-
-    .teacher-image {
-      width: 100px;
-      height: auto;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-
-    #settings {
-      margin-bottom: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #fff;
-    }
-
-    #settings label {
-      margin-right: 10px;
-    }
-
-    @media (max-width: 768px) {
-      table, th, td {
-        font-size: 14px;
-      }
-
-      #searchBox, #bgColorPicker, #fontPicker, #themeSelector {
-        font-size: 14px;
-        width: 100%;
-      }
-
-      h1 {
-        font-size: 22px;
-      }
-
-      h2 {
-        font-size: 18px;
-      }
-
-      #logo {
-        width: 120px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      #searchBox, #bgColorPicker, #fontPicker, #themeSelector {
-        width: 100%;
-        font-size: 12px;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-
-      h2 {
-        font-size: 16px;
-      }
+    .edit-btn:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <img id="logo" src="" alt="Sangeet Shyamala Logo" onerror="this.style.display='none'" />
-  <h1>Sangeet Shyamala - April 2025 Course Schedule & Fees</h1>
+  <h1>Editable Course Schedule - April 2025</h1>
 
-  <div id="settings">
-    <label>Upload Logo: <input type="file" accept="image/*" onchange="uploadLogo(event)" /></label>
-    <label>Background Color: <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()" /></label>
-    <label>Font Style:
-      <select id="fontPicker" onchange="changeFontFamily()">
-        <option value="Arial">Arial</option>
-        <option value="Verdana">Verdana</option>
-        <option value="Georgia">Georgia</option>
-        <option value="Times New Roman">Times New Roman</option>
-        <option value="Courier New">Courier New</option>
-      </select>
-    </label>
-    <label>Theme:
-      <select id="themeSelector" onchange="changeTheme()">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="classic">Classic</option>
-      </select>
-    </label>
-    <label>Upload Teacher Image: <input type="file" accept="image/*" onchange="uploadTeacherImage(event)" /></label>
-    <div id="teacherImagePreview"></div>
-  </div>
+  <input type="text" id="searchBox" placeholder="Search for a course..." onkeyup="searchCourse()" style="padding:10px;width:300px;margin-bottom:20px;">
 
-  <input type="text" id="searchBox" placeholder="Search for a course by name..." onkeyup="searchCourses()" />
-
-  <section class="course-table visible">
-    <h2>Full Course List - April 2025</h2>
-    <div style="white-space: pre-wrap; font-size: 14px">
-      <strong>Dance Fitness – Ajay Soni</strong><br>
-      Days: Mon, Wed, Fri<br>
-      Timings: 6:15 to 7:15pm<br>
-      Fee: ₹3500 (8 classes), ₹4500 (12 classes)<br><br>
-
-      <strong>Zumba Fitness – Shivani</strong><br>
-      Days: Thurs & Sat, Sun<br>
-      Timings: 12:30–1:30pm (Sun - Bgnr), 5:00–6:00pm (Thurs & Sat)<br>
-      Fee: ₹2000 (4 classes), ₹3500 (8 classes)<br><br>
-
-      <strong>Yoga – Geetika</strong><br>
-      Days: Tues & Thurs<br>
-      Timings: 6:00 to 7:00pm<br>
-      Fee: ₹3000 (8 classes)<br><br>
-
-      <strong>Karate – Tarun Chakravarty</strong><br>
-      Days: Mon & Thurs<br>
-      Timings: 5:00 to 6:00pm<br>
-      Fee: ₹2000 (8 classes)<br><br>
-
-      <strong>Contemporary Dance – Shivani</strong><br>
-      Days: Wed & Fri<br>
-      Timings: 4:00–5:00pm<br>
-      Fee: ₹3500 (8 classes)<br><br>
-
-      <strong>Music Classes – Shyamala Basu</strong><br>
-      Format: Individual and Group<br>
-      Timings: Coordinated individually<br>
-      Fee: ₹1000 per session (individual), ₹600 per session (group of 4+)<br><br>
-
-      <strong>Art & Craft – Nidhi</strong><br>
-      Days: Thurs & Sat<br>
-      Timings: 3:00 to 4:30pm<br>
-      Fee: ₹3200 (8 classes)<br><br>
-
-      <strong>Creative Writing – Soma Ghosh</strong><br>
-      Days: Fri & Sat<br>
-      Timings: 4:00 to 5:00pm<br>
-      Fee: ₹3000 (8 classes)<br><br>
-
-      <strong>Guitar – Sandeep</strong><br>
-      Format: Individual and Group<br>
-      Days: Sat & Sun<br>
-      Timings: 11:00am to 1:00pm<br>
-      Fee: ₹1000 per individual session, ₹600 per group session<br>
-    </div>
-  </section>
+  <table id="courseTable">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Instructor</th>
+        <th>Days</th>
+        <th>Time</th>
+        <th>Fee</th>
+        <th>Room No.</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td contenteditable="true">Bharatnatyam</td>
+        <td contenteditable="true">Meenakshi Rao</td>
+        <td contenteditable="true">Sat & Sun</td>
+        <td contenteditable="true">8:30–10:30am</td>
+        <td contenteditable="true">₹2800</td>
+        <td contenteditable="true">Room 101</td>
+        <td><button class="edit-btn" onclick="alert('Changes saved!')">Save</button></td>
+      </tr>
+      <tr>
+        <td contenteditable="true">Tabla</td>
+        <td contenteditable="true">Bijoy Mandal</td>
+        <td contenteditable="true">Wed & Fri</td>
+        <td contenteditable="true">5:00–6:00pm</td>
+        <td contenteditable="true">₹2000</td>
+        <td contenteditable="true">Room 202</td>
+        <td><button class="edit-btn" onclick="alert('Changes saved!')">Save</button></td>
+      </tr>
+      <tr>
+        <td contenteditable="true">Zumba Fitness</td>
+        <td contenteditable="true">Shivani</td>
+        <td contenteditable="true">Thurs & Sun</td>
+        <td contenteditable="true">5:00–6:00pm</td>
+        <td contenteditable="true">₹3500</td>
+        <td contenteditable="true">Room 303</td>
+        <td><button class="edit-btn" onclick="alert('Changes saved!')">Save</button></td>
+      </tr>
+    </tbody>
+  </table>
 
   <script>
-    function searchCourses() {
-      const input = document.getElementById("searchBox").value.toLowerCase();
-      const sections = document.querySelectorAll(".course-table");
-      let found = false;
+    function searchCourse() {
+      let input = document.getElementById("searchBox").value.toLowerCase();
+      let rows = document.querySelectorAll("#courseTable tbody tr");
 
-      sections.forEach(section => {
-        const text = section.innerText.toLowerCase();
-        if (text.includes(input) && input !== "") {
-          section.classList.add("visible");
-          found = true;
-        } else {
-          section.classList.remove("visible");
-        }
-      });
-
-      if (!found && input !== "") {
-        alert("No matching course found. Try a different keyword.");
-      } else if (input === "") {
-        sections.forEach(section => section.classList.remove("visible"));
-      }
-    }
-
-    function uploadLogo(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById("logo").src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function uploadTeacherImage(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = document.createElement("img");
-          img.src = e.target.result;
-          img.className = "teacher-image";
-          document.getElementById("teacherImagePreview").innerHTML = "";
-          document.getElementById("teacherImagePreview").appendChild(img);
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function changeBackgroundColor() {
-      const color = document.getElementById("bgColorPicker").value;
-      document.body.style.setProperty("--bg-color", color);
-    }
-
-    function changeFontFamily() {
-      const font = document.getElementById("fontPicker").value;
-      document.body.style.setProperty("--font-family", font);
-    }
-
-    function changeTheme() {
-      const theme = document.getElementById("themeSelector").value;
-      if (theme === "light") {
-        document.body.style.setProperty("--bg-color", "#f8f9fa");
-        document.body.style.setProperty("--text-color", "#333");
-        document.body.style.setProperty("--highlight-color", "#b22222");
-      } else if (theme === "dark") {
-        document.body.style.setProperty("--bg-color", "#1e1e1e");
-        document.body.style.setProperty("--text-color", "#f0f0f0");
-        document.body.style.setProperty("--highlight-color", "#ff6347");
-      } else if (theme === "classic") {
-        document.body.style.setProperty("--bg-color", "#fff8dc");
-        document.body.style.setProperty("--text-color", "#000080");
-        document.body.style.setProperty("--highlight-color", "#8b0000");
+      for (let i = 0; i < rows.length; i++) {
+        let rowText = rows[i].innerText.toLowerCase();
+        rows[i].style.display = rowText.includes(input) ? "" : "none";
       }
     }
   </script>
