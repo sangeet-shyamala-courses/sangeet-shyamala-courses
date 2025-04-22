@@ -131,11 +131,6 @@
         font-size: 16px;
       }
     }
-
-    .highlighted {
-      background-color: #ffeb3b; /* Yellow highlight */
-    }
-
   </style>
 </head>
 <body>
@@ -143,8 +138,8 @@
   <h1>Sangeet Shyamala - April 2025 Course Schedule & Fees</h1>
 
   <div id="settings">
-    <label>Upload Logo: <input type="file" accept="image/*" onchange="uploadLogo(event)" /></label><br>
-    <label>Background Color: <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()" /></label><br>
+    <label>Upload Logo: <input type="file" accept="image/*" onchange="uploadLogo(event)" /></label>
+    <label>Background Color: <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()" /></label>
     <label>Font Style:
       <select id="fontPicker" onchange="changeFontFamily()">
         <option value="Arial">Arial</option>
@@ -153,15 +148,15 @@
         <option value="Times New Roman">Times New Roman</option>
         <option value="Courier New">Courier New</option>
       </select>
-    </label><br>
+    </label>
     <label>Theme:
       <select id="themeSelector" onchange="changeTheme()">
         <option value="light">Light</option>
         <option value="dark">Dark</option>
         <option value="classic">Classic</option>
       </select>
-    </label><br>
-    <label>Upload Teacher Image: <input type="file" accept="image/*" onchange="uploadTeacherImage(event)" /></label><br>
+    </label>
+    <label>Upload Teacher Image: <input type="file" accept="image/*" onchange="uploadTeacherImage(event)" /></label>
     <div id="teacherImagePreview"></div>
   </div>
 
@@ -170,47 +165,58 @@
   <section class="course-table visible">
     <h2>Full Course List - April 2025</h2>
     <div style="white-space: pre-wrap; font-size: 14px">
-      <div id="danceFitness" class="course">
-        <strong>Dance Fitness – Ajay Soni</strong><br>
-        Days: Mon, Wed, Fri<br>
-        Timings: 6:15 to 7:15pm<br>
-        Fee: ₹3500 (8 classes), ₹4500 (12 classes)<br><br>
-      </div>
+      <strong>Dance Fitness – Ajay Soni</strong><br>
+      Days: Mon, Wed, Fri<br>
+      Timings: 6:15 to 7:15pm<br>
+      Fee: ₹3500 (8 classes), ₹4500 (12 classes)<br><br>
 
-      <div id="zumbaFitness" class="course">
-        <strong>Zumba Fitness – Shivani</strong><br>
-        Days: Thurs & Sat, Sun<br>
-        Timings: 12:30–1:30pm (Sun - Bgnr), 5:00–6:00pm (Thurs & Sat)<br>
-        Fee: ₹2000 (4 classes), ₹3500 (8 classes)<br><br>
-      </div>
+      <strong>Zumba Fitness – Shivani</strong><br>
+      Days: Thurs & Sat, Sun<br>
+      Timings: 12:30–1:30pm (Sun - Bgnr), 5:00–6:00pm (Thurs & Sat)<br>
+      Fee: ₹2000 (4 classes), ₹3500 (8 classes)<br><br>
 
-      <div id="yoga" class="course">
-        <strong>Yoga – Geetika</strong><br>
-        Days: Tues & Thurs<br>
-        Timings: 6:00 to 7:00pm<br>
-        Fee: ₹3000 (8 classes)<br><br>
-      </div>
+      <strong>Yoga – Geetika</strong><br>
+      Days: Tues & Thurs<br>
+      Timings: 6:00 to 7:00pm<br>
+      Fee: ₹3000 (8 classes)<br><br>
 
-      <div id="karate" class="course">
-        <strong>Karate – Tarun Chakravarty</strong><br>
-        Days: Mon & Thurs<br>
-        Timings: 5:00 to 6:00pm<br>
-        Fee: ₹2000 (8 classes)<br><br>
-      </div>
+      <strong>Karate – Tarun Chakravarty</strong><br>
+      Days: Mon & Thurs<br>
+      Timings: 5:00 to 6:00pm<br>
+      Fee: ₹2000 (8 classes)<br><br>
 
-      <div id="contemporaryDance" class="course">
-        <strong>Contemporary Dance – Shivani</strong><br>
-        Days: Wed & Fri<br>
-        Timings: 4:00–5:00pm<br>
-        Fee: ₹3500 (8 classes)<br>
-      </div>
+      <strong>Contemporary Dance – Shivani</strong><br>
+      Days: Wed & Fri<br>
+      Timings: 4:00–5:00pm<br>
+      Fee: ₹3500 (8 classes)<br><br>
+
+      <strong>Music Classes – Shyamala Basu</strong><br>
+      Format: Individual and Group<br>
+      Timings: Coordinated individually<br>
+      Fee: ₹1000 per session (individual), ₹600 per session (group of 4+)<br><br>
+
+      <strong>Art & Craft – Nidhi</strong><br>
+      Days: Thurs & Sat<br>
+      Timings: 3:00 to 4:30pm<br>
+      Fee: ₹3200 (8 classes)<br><br>
+
+      <strong>Creative Writing – Soma Ghosh</strong><br>
+      Days: Fri & Sat<br>
+      Timings: 4:00 to 5:00pm<br>
+      Fee: ₹3000 (8 classes)<br><br>
+
+      <strong>Guitar – Sandeep</strong><br>
+      Format: Individual and Group<br>
+      Days: Sat & Sun<br>
+      Timings: 11:00am to 1:00pm<br>
+      Fee: ₹1000 per individual session, ₹600 per group session<br>
     </div>
   </section>
 
   <script>
     function searchCourses() {
       const input = document.getElementById("searchBox").value.toLowerCase();
-      const sections = document.querySelectorAll(".course");
+      const sections = document.querySelectorAll(".course-table");
       let found = false;
 
       sections.forEach(section => {
@@ -282,16 +288,6 @@
         document.body.style.setProperty("--highlight-color", "#8b0000");
       }
     }
-
-    // Function to highlight a row when clicked
-    document.querySelectorAll('.course').forEach(item => {
-      item.addEventListener('click', function() {
-        document.querySelectorAll('.course').forEach(course => {
-          course.classList.remove('highlighted');
-        });
-        item.classList.add('highlighted');
-      });
-    });
   </script>
 </body>
 </html>
